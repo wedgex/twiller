@@ -1,9 +1,11 @@
 class Dice
   include Cinch::Plugin
 
-  match /roll/, :method => :roll
+  listen_to :message
 
-  def roll(m)
-    m.reply "You rolled", true
+  def listen(m)
+    if m.message.match /roll/
+      m.reply "You rolled", true
+    end
   end
 end
