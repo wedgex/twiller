@@ -11,7 +11,7 @@ class Youtube
       doc = Nokogiri::XML(open(url))
       title = doc.xpath('//media:title/text()', {'media' => 'http://search.yahoo.com/mrss/' })
 
-      m.reply "YouTube: #{title}"
+      m.reply Cinch::Formatting.format("%s: #{title}" % [Format(:bold, :red, 'YouTube')])
     end
   end
 end
