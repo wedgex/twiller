@@ -11,7 +11,7 @@ class AutoOp
 
   def add(m)
     rx = /^!op (?<nick>\w+)/
-    if md = rx.match(m.message) && m.channel.opped?(m.user)
+    if (md = rx.match(m.message)) && m.channel.opped?(m.user)
       bot.config.config['channels'][m.channel]['operators'] << md[:nick]
       #TODO save the config
       m.channel.op(md[:nick])
