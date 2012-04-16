@@ -1,10 +1,5 @@
 channels:
-  spacestro:
-    operators:
-      - wedgex
-      - poemdexter
-      - vaxinate
-  twillers:
+  "#twillers":
     operators:
       - wedgex
       - poemdexter

@@ -12,7 +12,7 @@ bot = Cinch::Bot.new do
   configure do |c|
     c.server = 'irc.freenode.net'
     c.config = YAML.load(File.open('config.yaml'))
-    c.channels = c.config['channels'].keys.map { |c| "##{c}" }
+    c.channels = c.config['channels'].keys
     c.nick = 'twillbot'
     c.plugins.plugins = [AutoOp, Dice, Spotify, Youtube, Butts]
   end
