@@ -1,0 +1,12 @@
+channels:
+  spacestro:
+    operators:
+      - wedgex
+      - poemdexter
+      - vaxinate
+  twillers:
+    operators:
+      - wedgex
+      - poemdexter
+      - vaxinate
+      - syntaxrigger
