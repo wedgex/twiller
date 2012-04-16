@@ -1,12 +1,13 @@
+---
 channels:
-  "#twillers":
+  ! '#twillers':
     operators:
-      - wedgex
-      - poemdexter
-      - vaxinate
-      - syntaxrigger
-  "#spacestro":
+    - wedgex
+    - poemdexter
+    - vaxinate
+    - syntaxrigger
+  ! '#spacestro':
     operators:
-      - wedgex
-      - poemdexter
-      - vaxinate
+    - wedgex
+    - poemdexter
+    - vaxinate
