@@ -4,7 +4,7 @@ class Youtube
   listen_to :message
 
   def listen(m)
-    rx = /www\.youtube\.com\/watch\?v=(?<id>[A-Za-z0-9-]+)/
+    rx = /www\.youtube\.com\/watch\?.*v=(?<id>[A-Za-z0-9-]+)/
 
     if md = m.message.match(rx)
       url = "http://gdata.youtube.com/feeds/api/videos/#{md[:id]}?v=2"
