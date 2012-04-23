@@ -8,6 +8,7 @@ require_relative 'plugins/spotify'
 require_relative 'plugins/butts'
 require_relative 'plugins/youtube'
 require_relative 'plugins/diablo'
+require_relative 'plugins/interesting'
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -15,7 +16,7 @@ bot = Cinch::Bot.new do
     c.config = YAML.load(File.open('config.yaml'))
     c.channels = c.config['channels'].keys
     c.nick = 'twillbot'
-    c.plugins.plugins = [AutoOp, Dice, Spotify, Youtube, Butts, Diablo]
+    c.plugins.plugins = [AutoOp, Dice, Spotify, Youtube, Butts, Diablo, Interesting]
   end
 end
 

@@ -5,3 +5,8 @@ channels:
       - poemdexter
       - vaxinate
       - syntaxrigger
+  "#spacestro":
+    operators:
+      - wedgex
+      - poemdexter
+      - vaxinate
