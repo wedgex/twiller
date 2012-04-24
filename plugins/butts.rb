@@ -16,10 +16,11 @@ class Butts
         m.reply "[BUTTBOT] turned off."
       end
     elsif @buttbot_switch
-      if rand(100) > 90
-        words = m.message.split(/[^a-zA-Z]/)
+      if rand(100) < 3
+        words = m.message.split
         replace_word = words[rand(words.count)]
-        newmsg = m.message.gsub(replace_word, "butt")
+        newmsg = m.message
+        newmsg[replace_word] = "butt"
         m.reply "[BUTTBOT] " + newmsg
       end
     end
