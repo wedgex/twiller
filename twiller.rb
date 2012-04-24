@@ -2,6 +2,7 @@ require 'cinch'
 require 'nokogiri'
 require 'open-uri'
 require 'yaml'
+require 'markov'
 require_relative 'plugins/auto_op'
 require_relative 'plugins/dice'
 require_relative 'plugins/spotify'
@@ -9,6 +10,7 @@ require_relative 'plugins/butts'
 require_relative 'plugins/youtube'
 require_relative 'plugins/diablo'
 require_relative 'plugins/interesting'
+require_relative 'plugins/markovgen'
 
 bot = Cinch::Bot.new do
   configure do |c|
@@ -16,7 +18,7 @@ bot = Cinch::Bot.new do
     c.config = YAML.load(File.open('config.yaml'))
     c.channels = c.config['channels'].keys
     c.nick = 'twillbot'
-    c.plugins.plugins = [AutoOp, Dice, Spotify, Youtube, Butts, Diablo, Interesting]
+    c.plugins.plugins = [AutoOp, Dice, Spotify, Youtube, Butts, Diablo, Interesting, Markovgen]
   end
 end
 
