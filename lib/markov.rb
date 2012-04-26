@@ -5,6 +5,20 @@ class Markov
     @data = {}
   end
   
+  def save
+    File.open('yaml/markov_data.yaml', 'w') do |out|
+      YAML.dump( @data, out )
+    end
+    File.open('yaml/markov_firsts.yaml', 'w') do |out|
+      YAML.dump( @firsts, out )
+    end
+  end
+  
+  def load
+    @data = YAML.load_file('yaml/markov_data.yaml')
+    @firsts = YAML.load_file('yaml/markov_firsts.yaml')
+  end
+  
   def add(statement)
     words = statement.split
     if words.length > 2

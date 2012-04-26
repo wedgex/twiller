@@ -6,11 +6,14 @@ class Markovgen
   def initialize(*args)
     super
     @markovbot = Markov.new
+    @markovbot.load
     @markov_switch = false
     @markov_freq = 10
+    @markov_msg_counter = 0
   end
   
   def listen(m)
+    @markov_msg_counter += 1
     reject = /(http[s?]|www.\w*|\w*.com|\w*.net|\w*.biz)/
     switch_regex = /!markov\s(?<switch>on|off)/
     freq_regex = /!markov\s(?<freq>\d+\z)/
@@ -35,8 +38,14 @@ class Markovgen
       mtext = text.gsub(reject, '')
       @markovbot.add(mtext)
     end
+    
     if @markov_switch && rand(100) < @markov_freq
       m.reply @markovbot.get_chain 
+    end
+    
+    if @markov_msg_counter > 1000
+      @markovbot.save
+      @markov_msg_counter = 0
     end
   end
 end
