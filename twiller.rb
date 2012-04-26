@@ -2,7 +2,6 @@ require 'cinch'
 require 'nokogiri'
 require 'open-uri'
 require 'yaml'
-require 'markov'
 require_relative 'plugins/auto_op'
 require_relative 'plugins/dice'
 require_relative 'plugins/spotify'
@@ -11,6 +10,7 @@ require_relative 'plugins/youtube'
 require_relative 'plugins/diablo'
 require_relative 'plugins/interesting'
 require_relative 'plugins/markovgen'
+require_relative 'lib/markov'
 
 bot = Cinch::Bot.new do
   configure do |c|

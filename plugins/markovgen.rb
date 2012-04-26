@@ -7,13 +7,15 @@ class Markovgen
     super
     @markovbot = Markov.new
     @markov_switch = false
+    @markov_freq = 10
   end
   
   def listen(m)
-  
-    reject = /http[s?]|www|.com|.net|.biz|/
+    reject = /(http[s?]|www.\w*|\w*.com|\w*.net|\w*.biz)/
     switch_regex = /!markov\s(?<switch>on|off)/
+    freq_regex = /!markov\s(?<freq>\d+\z)/
     match = switch_regex.match(m.message)
+    fmatch = freq_regex.match(m.message)
     if match
       if match[:switch] == "on" && m.channel.opped?(m.user)
         @markov_switch = true
@@ -22,20 +24,19 @@ class Markovgen
         @markov_switch = false 
         m.reply "[MARKOV] turned off."
       end
+    elsif fmatch
+      @markov_freq = fmatch[:freq].to_i
+      @markov_freq = 100 if fmatch[:freq].to_i > 100
+      @markov_freq = 0 if fmatch[:freq].to_i < 0
+      m.reply "[MARKOV] Frequency set to #{@markov_freq}%"
     elsif m.message.match(/![\w]+ (on|off)/) # catch other commands
     elsif m.user != "twillbot"
       text = m.message
-      words = text.split
-      final_words = words
-      words.each do |word|
-        final_words.delete(word) if word.match(reject)
-      end
-      @markovbot.add(*final_words)
+      mtext = text.gsub(reject, '')
+      @markovbot.add(mtext)
     end
-    
-    if @markov_switch && rand(100) < 3
-      message = @markovbot.generate(10).join(" ") + "."
-      m.reply message
+    if @markov_switch && rand(100) < @markov_freq
+      m.reply @markovbot.get_chain 
     end
   end
 end
