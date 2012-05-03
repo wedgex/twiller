@@ -7,15 +7,16 @@ class Markovgen
     super
     @markovbot = Markov.new
     @markovbot.load
-    @markov_switch = false
+    @markov_switch = true
     @markov_freq = 10
     @markov_msg_counter = 0
+    @markov_earmuffs = false
   end
   
   def listen(m)
     @markov_msg_counter += 1
     reject = /(http[s?]|www.\w*|\w*.com|\w*.net|\w*.biz)/
-    switch_regex = /!markov\s(?<switch>on|off)/
+    switch_regex = /!markov\s(?<switch>on|off|earmuffs)/
     freq_regex = /!markov\s(?<freq>\d+\z)/
     match = switch_regex.match(m.message)
     fmatch = freq_regex.match(m.message)
@@ -26,6 +27,10 @@ class Markovgen
       elsif match[:switch] == "off" && m.channel.opped?(m.user)
         @markov_switch = false 
         m.reply "[MARKOV] turned off."
+      elsif match[:switch] == "earmuffs" && m.channel.opped?(m.user)
+        @markov_earmuffs = !@markov_earmuffs
+        m.reply "[MARKOV] message listening OFF" if @markov_earmuffs
+        m.reply "[MARKOV] message listening ON" if !@markov_earmuffs
       end
     elsif fmatch
       @markov_freq = fmatch[:freq].to_i
