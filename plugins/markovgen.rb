@@ -43,7 +43,7 @@ class Markovgen
       m.reply @markovbot.get_chain 
     end
     
-    if @markov_msg_counter > 1000
+    if @markov_msg_counter > 100
       @markovbot.save
       @markov_msg_counter = 0
     end
